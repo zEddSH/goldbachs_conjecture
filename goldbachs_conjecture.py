@@ -31,7 +31,7 @@ def time_it(f):
 @time_it
 def generate_primes(n: int):
     sieve = [True] * n
-    for i in tqdm(range(3, int(n**0.5) + 1, 2)):
+    for i in tqdm(range(3, int(n**0.5) + 1, 2), desc="Generating Primes"):
         if sieve[i]:
             sieve[i * i :: 2 * i] = [False] * ((n - i * i - 1) // (2 * i) + 1)
     return [2] + [i for i in range(3, n, 2) if sieve[i]]
@@ -41,7 +41,7 @@ def generate_primes(n: int):
 @memory.cache
 @time_it
 def goldbachs_conjecture(limit: int):
-    for i in tqdm(range(4, limit, 2)):
+    for i in tqdm(range(4, limit, 2), desc="Checking Goldbach's Conjecture"):
         for prime in primes:
             if prime > i:
                 break
